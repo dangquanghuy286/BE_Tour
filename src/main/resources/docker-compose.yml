@@ -1,0 +1,22 @@
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: booktour-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3307:3306"
+    volumes:
+      - travela-mysql-data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: booktour-phpmyadmin
+    environment:
+      PMA_HOST: booktour-mysql
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+volumes:
+  travela-mysql-data:
